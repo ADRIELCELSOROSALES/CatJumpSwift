@@ -41,6 +41,7 @@ class GameScene: SKScene {
     // MARK: - Lifecycle
 
     override func didMove(to view: SKView) {
+        if size == .zero { size = view.bounds.size }
         backgroundColor = .clear
 
         // Background

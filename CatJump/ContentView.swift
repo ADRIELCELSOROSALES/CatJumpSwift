@@ -21,18 +21,16 @@ struct SpriteKitView: UIViewRepresentable {
         view.ignoresSiblingOrder = true
         view.showsFPS       = false
         view.showsNodeCount = false
-        let svcs = services
-        DispatchQueue.main.async {
-            guard view.scene == nil else { return }
-            let scene = MenuScene(services: svcs)
-            scene.scaleMode = .resizeFill
-            scene.size = view.bounds.size
-            view.presentScene(scene)
-        }
         return view
     }
 
-    func updateUIView(_ uiView: SKView, context: Context) {}
+    func updateUIView(_ uiView: SKView, context: Context) {
+        guard uiView.scene == nil, uiView.bounds.size != .zero else { return }
+        let scene = MenuScene(services: services)
+        scene.scaleMode = .resizeFill
+        scene.size = uiView.bounds.size
+        uiView.presentScene(scene)
+    }
 }
 #elseif os(macOS)
 struct SpriteKitView: NSViewRepresentable {
@@ -43,17 +41,15 @@ struct SpriteKitView: NSViewRepresentable {
         view.ignoresSiblingOrder = true
         view.showsFPS       = false
         view.showsNodeCount = false
-        let svcs = services
-        DispatchQueue.main.async {
-            guard view.scene == nil else { return }
-            let scene = MenuScene(services: svcs)
-            scene.scaleMode = .resizeFill
-            scene.size = view.bounds.size
-            view.presentScene(scene)
-        }
         return view
     }
 
-    func updateNSView(_ nsView: SKView, context: Context) {}
+    func updateNSView(_ nsView: SKView, context: Context) {
+        guard nsView.scene == nil, nsView.bounds.size != .zero else { return }
+        let scene = MenuScene(services: services)
+        scene.scaleMode = .resizeFill
+        scene.size = nsView.bounds.size
+        nsView.presentScene(scene)
+    }
 }
 #endif

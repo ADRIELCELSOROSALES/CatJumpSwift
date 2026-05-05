@@ -23,6 +23,7 @@ final class GameOverScene: SKScene {
     // MARK: - Lifecycle
 
     override func didMove(to view: SKView) {
+        if size == .zero { size = view.bounds.size }
         let cx = size.width / 2
         let h  = size.height
 

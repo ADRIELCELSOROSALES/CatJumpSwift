@@ -24,6 +24,7 @@ class MenuScene: SKScene {
     // MARK: - Lifecycle
 
     override func didMove(to view: SKView) {
+        if size == .zero { size = view.bounds.size }
         let cx = size.width / 2
         let h  = size.height
 
@@ -90,21 +91,24 @@ class MenuScene: SKScene {
 
     private func buildPlayButton(cx: CGFloat, h: CGFloat) {
         playButton = buttonNode(text: "▶  JUGAR", width: 190, height: 58,
-                                fill: hex(0x2E7D32), at: CGPoint(x: cx, y: h * 0.27))
+                                fill: hex(0x2E7D32), at: CGPoint(x: cx, y: h * 0.27),
+                                name: "play")
         addChild(playButton)
     }
 
     private func buildRankingButton(cx: CGFloat, h: CGFloat) {
         rankingButton = buttonNode(text: "🏆 RANKING", width: 150, height: 44,
                                    fill: SKColor(red: 0.45, green: 0.28, blue: 0.0, alpha: 0.88),
-                                   at: CGPoint(x: cx + 100, y: h * 0.10))
+                                   at: CGPoint(x: cx + 100, y: h * 0.10),
+                                   name: "ranking")
         addChild(rankingButton!)
     }
 
     private func buildSkinsButton(h: CGFloat) {
         skinsButton = buttonNode(text: "SKINS", width: 130, height: 44,
                                  fill: SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 0.88),
-                                 at: CGPoint(x: 82, y: h * 0.10))
+                                 at: CGPoint(x: 82, y: h * 0.10),
+                                 name: "skins")
         addChild(skinsButton)
 
         // Mini dancing cat above the SKINS button
@@ -148,9 +152,10 @@ class MenuScene: SKScene {
 #endif
 
     private func handleTap(at location: CGPoint) {
-        if playButton.frame.contains(location)           { goToGame()       }
-        if skinsButton.frame.contains(location)          { goToSkins()      }
-        if let rb = rankingButton, rb.frame.contains(location) { goToRanking() }
+        let hit = nodes(at: location).compactMap(\.name)
+        if hit.contains("play")    { goToGame()    }
+        if hit.contains("skins")   { goToSkins()   }
+        if hit.contains("ranking") { goToRanking() }
     }
 
     private func goToGame() {
@@ -173,9 +178,10 @@ class MenuScene: SKScene {
     // MARK: - Factory helpers
 
     private func buttonNode(text: String, width: CGFloat, height: CGFloat,
-                            fill: SKColor, at pos: CGPoint) -> SKNode {
+                            fill: SKColor, at pos: CGPoint, name: String) -> SKNode {
         let container = SKNode()
         container.position = pos
+        container.name = name
 
         let bg = SKShapeNode(rect: CGRect(x: -width/2, y: -height/2,
                                           width: width, height: height),
@@ -183,6 +189,7 @@ class MenuScene: SKScene {
         bg.fillColor   = fill
         bg.strokeColor = fill.withAlphaComponent(0.4)
         bg.lineWidth   = 2
+        bg.name        = name
         container.addChild(bg)
 
         let label = SKLabelNode(text: text)
@@ -191,6 +198,7 @@ class MenuScene: SKScene {
         label.fontColor = .white
         label.verticalAlignmentMode   = .center
         label.horizontalAlignmentMode = .center
+        label.name = name
         container.addChild(label)
 
         return container
