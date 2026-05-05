@@ -6,14 +6,75 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F5AA1E6A2FAA2218003823CA /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AA1E692FAA2218003823CA /* WidgetKit.framework */; };
+		F5AA1E6C2FAA2218003823CA /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5AA1E6B2FAA2218003823CA /* SwiftUI.framework */; };
+		F5AA1E7B2FAA221E003823CA /* CatJumpLiveActivityExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = F5AA1E672FAA2218003823CA /* CatJumpLiveActivityExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F5AA1E792FAA221E003823CA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5AA1CEA2FA92983003823CA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5AA1E662FAA2218003823CA;
+			remoteInfo = CatJumpLiveActivityExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F5AA1E7C2FAA221E003823CA /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F5AA1E7B2FAA221E003823CA /* CatJumpLiveActivityExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F5AA1CF22FA92983003823CA /* CatJump.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatJump.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5AA1E672FAA2218003823CA /* CatJumpLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CatJumpLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5AA1E692FAA2218003823CA /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		F5AA1E6B2FAA2218003823CA /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F5AA1E7F2FAA221E003823CA /* Exceptions for "CatJumpLiveActivity" folder in "CatJumpLiveActivityExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F5AA1E662FAA2218003823CA /* CatJumpLiveActivityExtension */;
+		};
+		F5AA1E822FAA2FD1003823CA /* Exceptions for "CatJump" folder in "CatJumpLiveActivityExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				DynamicIsland/CatJumpAttributes.swift,
+			);
+			target = F5AA1E662FAA2218003823CA /* CatJumpLiveActivityExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F5AA1CF42FA92983003823CA /* CatJump */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F5AA1E822FAA2FD1003823CA /* Exceptions for "CatJump" folder in "CatJumpLiveActivityExtension" target */,
+			);
 			path = CatJump;
+			sourceTree = "<group>";
+		};
+		F5AA1E6D2FAA2218003823CA /* CatJumpLiveActivity */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F5AA1E7F2FAA221E003823CA /* Exceptions for "CatJumpLiveActivity" folder in "CatJumpLiveActivityExtension" target */,
+			);
+			path = CatJumpLiveActivity;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,6 +87,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5AA1E642FAA2218003823CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5AA1E6C2FAA2218003823CA /* SwiftUI.framework in Frameworks */,
+				F5AA1E6A2FAA2218003823CA /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -33,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				F5AA1CF42FA92983003823CA /* CatJump */,
+				F5AA1E6D2FAA2218003823CA /* CatJumpLiveActivity */,
+				F5AA1E682FAA2218003823CA /* Frameworks */,
 				F5AA1CF32FA92983003823CA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +113,18 @@
 			isa = PBXGroup;
 			children = (
 				F5AA1CF22FA92983003823CA /* CatJump.app */,
+				F5AA1E672FAA2218003823CA /* CatJumpLiveActivityExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		F5AA1E682FAA2218003823CA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F5AA1E692FAA2218003823CA /* WidgetKit.framework */,
+				F5AA1E6B2FAA2218003823CA /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +137,12 @@
 				F5AA1CEE2FA92983003823CA /* Sources */,
 				F5AA1CEF2FA92983003823CA /* Frameworks */,
 				F5AA1CF02FA92983003823CA /* Resources */,
+				F5AA1E7C2FAA221E003823CA /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				F5AA1E7A2FAA221E003823CA /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				F5AA1CF42FA92983003823CA /* CatJump */,
@@ -69,6 +153,28 @@
 			productName = CatJump;
 			productReference = F5AA1CF22FA92983003823CA /* CatJump.app */;
 			productType = "com.apple.product-type.application";
+		};
+		F5AA1E662FAA2218003823CA /* CatJumpLiveActivityExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5AA1E802FAA221E003823CA /* Build configuration list for PBXNativeTarget "CatJumpLiveActivityExtension" */;
+			buildPhases = (
+				F5AA1E632FAA2218003823CA /* Sources */,
+				F5AA1E642FAA2218003823CA /* Frameworks */,
+				F5AA1E652FAA2218003823CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				F5AA1E6D2FAA2218003823CA /* CatJumpLiveActivity */,
+			);
+			name = CatJumpLiveActivityExtension;
+			packageProductDependencies = (
+			);
+			productName = CatJumpLiveActivityExtension;
+			productReference = F5AA1E672FAA2218003823CA /* CatJumpLiveActivityExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +187,9 @@
 				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					F5AA1CF12FA92983003823CA = {
+						CreatedOnToolsVersion = 26.4.1;
+					};
+					F5AA1E662FAA2218003823CA = {
 						CreatedOnToolsVersion = 26.4.1;
 					};
 				};
@@ -100,12 +209,20 @@
 			projectRoot = "";
 			targets = (
 				F5AA1CF12FA92983003823CA /* CatJump */,
+				F5AA1E662FAA2218003823CA /* CatJumpLiveActivityExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		F5AA1CF02FA92983003823CA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5AA1E652FAA2218003823CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +239,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5AA1E632FAA2218003823CA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F5AA1E7A2FAA221E003823CA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5AA1E662FAA2218003823CA /* CatJumpLiveActivityExtension */;
+			targetProxy = F5AA1E792FAA221E003823CA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		F5AA1CFB2FA92986003823CA /* Debug */ = {
@@ -254,6 +386,11 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required for audio playback during gameplay";
+				"INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivities[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivities[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -262,12 +399,12 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rosales.CatJump;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -280,7 +417,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.4;
 			};
 			name = Debug;
@@ -298,6 +435,11 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Required for audio playback during gameplay";
+				"INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivitiesFrequentUpdates[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivities[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_NSSupportsLiveActivities[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -306,12 +448,12 @@
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.4;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rosales.CatJump;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -324,8 +466,73 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TARGETED_DEVICE_FAMILY = 1;
 				XROS_DEPLOYMENT_TARGET = 26.4;
+			};
+			name = Release;
+		};
+		F5AA1E7D2FAA221E003823CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GWPCG49776;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CatJumpLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CatJumpLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rosales.CatJump.CatJumpLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F5AA1E7E2FAA221E003823CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = GWPCG49776;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CatJumpLiveActivity/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CatJumpLiveActivity;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = rosales.CatJump.CatJumpLiveActivity;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -346,6 +553,15 @@
 			buildConfigurations = (
 				F5AA1CFE2FA92986003823CA /* Debug */,
 				F5AA1CFF2FA92986003823CA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5AA1E802FAA221E003823CA /* Build configuration list for PBXNativeTarget "CatJumpLiveActivityExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5AA1E7D2FAA221E003823CA /* Debug */,
+				F5AA1E7E2FAA221E003823CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

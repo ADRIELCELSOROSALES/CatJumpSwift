@@ -1,24 +1,59 @@
-//
-//  ContentView.swift
-//  CatJump
-//
-//  Created by Adriel Celso Rosales on 04/05/2026.
-//
-
 import SwiftUI
+import SpriteKit
 
 struct ContentView: View {
+    @State private var services = ServiceContainer()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+        SpriteKitView(services: services)
+            .ignoresSafeArea()
     }
 }
 
-#Preview {
-    ContentView()
+// MARK: - Platform bridge
+
+#if os(iOS) || os(visionOS)
+struct SpriteKitView: UIViewRepresentable {
+    var services: ServiceContainer
+
+    func makeUIView(context: Context) -> SKView {
+        let view = SKView()
+        view.ignoresSiblingOrder = true
+        view.showsFPS       = false
+        view.showsNodeCount = false
+        let svcs = services
+        DispatchQueue.main.async {
+            guard view.scene == nil else { return }
+            let scene = MenuScene(services: svcs)
+            scene.scaleMode = .resizeFill
+            scene.size = view.bounds.size
+            view.presentScene(scene)
+        }
+        return view
+    }
+
+    func updateUIView(_ uiView: SKView, context: Context) {}
 }
+#elseif os(macOS)
+struct SpriteKitView: NSViewRepresentable {
+    var services: ServiceContainer
+
+    func makeNSView(context: Context) -> SKView {
+        let view = SKView()
+        view.ignoresSiblingOrder = true
+        view.showsFPS       = false
+        view.showsNodeCount = false
+        let svcs = services
+        DispatchQueue.main.async {
+            guard view.scene == nil else { return }
+            let scene = MenuScene(services: svcs)
+            scene.scaleMode = .resizeFill
+            scene.size = view.bounds.size
+            view.presentScene(scene)
+        }
+        return view
+    }
+
+    func updateNSView(_ nsView: SKView, context: Context) {}
+}
+#endif
