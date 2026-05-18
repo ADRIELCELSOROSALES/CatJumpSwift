@@ -27,10 +27,10 @@ struct GameState {
         var platforms: [Platform] = []
         let margin = GameConstants.platformWidth / 2 + 12
 
-        // platform.y = top edge; cat body bottom is 30 pts below cat.y (from CatNode local y=-30)
-        // Collision triggers when catFeetY (cat.y + 30) reaches platform.y, so:
-        // startPlatY = catY + 30  →  cat appears standing on the platform at launch
-        let startPlatY = catY + 30
+        // platform.y = top edge; body bottom scaled by catDisplayScale(0.65) → 20 pts below cat.y
+        // Collision triggers when catFeetY (cat.y + 20) reaches platform.y, so:
+        // startPlatY = catY + 20  →  cat appears standing on the platform at launch
+        let startPlatY = catY + 20
         platforms.append(Platform(x: screenWidth / 2, y: startPlatY))
 
         // Pre-generate platforms upward (decreasing Y) to cover 2.5 screens above the cat.

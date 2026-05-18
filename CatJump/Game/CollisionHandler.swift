@@ -14,8 +14,8 @@ class CollisionHandler {
         let catLeft  = cat.x - cat.width  / 2 + catMargin
         let catRight = cat.x + cat.width  / 2 - catMargin
 
-        // CatNode draws the body bottom at local y = -30, which sits 30 pts below cat.y in game space
-        let catFeetY = cat.y + 30
+        // Body bottom is at local y = -30 in CatNode; scaled by catDisplayScale (0.65) → 20 pts below center
+        let catFeetY = cat.y + 20
 
         let platLeft  = platform.x - platform.width  / 2
         let platRight = platform.x + platform.width  / 2

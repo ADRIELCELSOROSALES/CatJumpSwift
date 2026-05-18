@@ -8,6 +8,7 @@ enum GameConstants {
     static let maxFallVelocity: CGFloat       = 18
 
     static let catSize: CGFloat               = 120
+    static let catDisplayScale: CGFloat       = 0.65
     static let fatnessGainPerBird: CGFloat    = 0.1
     static let maxFatness: CGFloat            = 1.0
 

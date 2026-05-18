@@ -220,10 +220,11 @@ class CatNode: SKNode {
     }
 
     private func applyBodyScale(_ scale: BodyScale) {
+        let base = GameConstants.catDisplayScale
         switch scale {
-        case .slim:   xScale = 0.85
-        case .chonky: xScale = 1.15; yScale = 1.05
-        case .normal: xScale = 1.0;  yScale = 1.0
+        case .slim:   xScale = base * 0.85; yScale = base
+        case .chonky: xScale = base * 1.15; yScale = base * 1.05
+        case .normal: xScale = base;        yScale = base
         }
     }
 

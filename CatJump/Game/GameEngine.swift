@@ -203,7 +203,7 @@ class GameEngine {
         // --- Platforms ---
         if let platform = collisionHandler.findCollidingPlatform(cat: s.cat, platforms: s.platforms) {
             // Snap feet to platform surface so the cat never visually sinks into the platform
-            s.cat.y = platform.y - 30
+            s.cat.y = platform.y - 20
 
             let jumpVel: CGFloat
             if s.cat.superJumpActive && s.cat.superJumpsRemaining > 0 {

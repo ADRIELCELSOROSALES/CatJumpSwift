@@ -6,8 +6,8 @@ struct Cat {
     var y: CGFloat
     var velocityX: CGFloat = 0
     var velocityY: CGFloat = 0
-    var width: CGFloat = 120
-    var height: CGFloat = 120
+    var width: CGFloat = 78
+    var height: CGFloat = 78
     var isJumping: Bool = false
     var facingRight: Bool = true
     var fatness: CGFloat = 0.0
