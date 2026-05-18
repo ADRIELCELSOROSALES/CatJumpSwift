@@ -22,6 +22,6 @@ struct Cat {
 
     var bottom: CGFloat { y - height / 2 }
     var right: CGFloat { x + width / 2 }
-    var isInvincible: Bool { invincibilityFrames > 0 }
+    var isInvincible: Bool { invincibilityFrames > 0 || hasPowerUp }
     var hasPowerUp: Bool { jetpackActive || superJumpActive }
 }
