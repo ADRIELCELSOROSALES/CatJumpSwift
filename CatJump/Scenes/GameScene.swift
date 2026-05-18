@@ -59,7 +59,8 @@ class GameScene: SKScene {
         hudLayer = SKNode()
         hudLayer.zPosition = 100
         addChild(hudLayer)
-        setupHUD(topInset: view.safeAreaInsets.top)
+        let topInset = view.window?.safeAreaInsets.top ?? view.safeAreaInsets.top
+        setupHUD(topInset: topInset)
 
         // Audio
         SoundManager.shared.startBackgroundMusic()
