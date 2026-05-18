@@ -8,6 +8,14 @@ enum BodyScale: String, CaseIterable {
     case normal, chonky, slim
 }
 
+enum AccessoryType: String, CaseIterable {
+    case none
+    case topHat, crownGold, crownGem, cap, beanie, witchHat, cowboyHat, vikingHelmet
+    case monocle, glasses, sunglasses, piratePatch
+    case halo, antenna, alienAntenna
+    case bowtie, ribbon, headphones
+}
+
 struct CatSkin {
     let id: String
     let name: String
@@ -19,6 +27,29 @@ struct CatSkin {
     let bodyScale: BodyScale
     let price: Int
     let isDefault: Bool
+    let accessory: AccessoryType
+    let accessoryColor: SKColor
+
+    init(id: String, name: String,
+         bodyColor: SKColor, bellyColor: SKColor,
+         eyeColor: SKColor, patternColor: SKColor,
+         patternType: PatternType, bodyScale: BodyScale,
+         price: Int, isDefault: Bool,
+         accessory: AccessoryType = .none,
+         accessoryColor: SKColor = .clear) {
+        self.id           = id
+        self.name         = name
+        self.bodyColor    = bodyColor
+        self.bellyColor   = bellyColor
+        self.eyeColor     = eyeColor
+        self.patternColor = patternColor
+        self.patternType  = patternType
+        self.bodyScale    = bodyScale
+        self.price        = price
+        self.isDefault    = isDefault
+        self.accessory      = accessory
+        self.accessoryColor = accessoryColor
+    }
 }
 
 private func color(_ rgb: UInt32) -> SKColor {
@@ -296,6 +327,127 @@ enum CatSkins {
                 bodyColor: color(0x00695C), bellyColor: color(0x4DB6AC),
                 eyeColor:  color(0xFFD740), patternColor: color(0x004D40),
                 patternType: .marbled,    bodyScale: .normal, price: 475, isDefault: false),
+
+        // ── Con accesorios ───────────────────────────────────────────────────
+        CatSkin(id: "gentleman",  name: "Gentleman",
+                bodyColor: color(0x1A1A2E), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0x26C6DA), patternColor: color(0xFFD700),
+                patternType: .tuxedo,     bodyScale: .slim,   price: 650, isDefault: false,
+                accessory: .topHat,       accessoryColor: color(0x0D0D1A)),
+
+        CatSkin(id: "king",       name: "King",
+                bodyColor: color(0xB8860B), bellyColor: color(0xFFD700),
+                eyeColor:  color(0x1A237E), patternColor: color(0xE53935),
+                patternType: .marbled,    bodyScale: .chonky, price: 750, isDefault: false,
+                accessory: .crownGold,    accessoryColor: color(0xFFD700)),
+
+        CatSkin(id: "princess",   name: "Princess",
+                bodyColor: color(0xF8BBD0), bellyColor: color(0xFCE4EC),
+                eyeColor:  color(0xAD1457), patternColor: color(0xF06292),
+                patternType: .solid,      bodyScale: .normal, price: 700, isDefault: false,
+                accessory: .crownGem,     accessoryColor: color(0xFFD700)),
+
+        CatSkin(id: "pirate",     name: "Pirate",
+                bodyColor: color(0x4E342E), bellyColor: color(0xD7CCC8),
+                eyeColor:  color(0xF44336), patternColor: color(0x1A0000),
+                patternType: .spotted,    bodyScale: .normal, price: 550, isDefault: false,
+                accessory: .piratePatch,  accessoryColor: color(0x1A0000)),
+
+        CatSkin(id: "witch",      name: "Witch",
+                bodyColor: color(0x1A1A2E), bellyColor: color(0x2D2D44),
+                eyeColor:  color(0x00E676), patternColor: color(0x7B1FA2),
+                patternType: .solid,      bodyScale: .slim,   price: 600, isDefault: false,
+                accessory: .witchHat,     accessoryColor: color(0x1A1A2E)),
+
+        CatSkin(id: "cowboy",     name: "Cowboy",
+                bodyColor: color(0xC9A96E), bellyColor: color(0xF0DCBA),
+                eyeColor:  color(0x5D4037), patternColor: color(0x8B5A2B),
+                patternType: .tabby,      bodyScale: .normal, price: 500, isDefault: false,
+                accessory: .cowboyHat,    accessoryColor: color(0x8B4513)),
+
+        CatSkin(id: "viking",     name: "Viking",
+                bodyColor: color(0xB0BEC5), bellyColor: color(0xECEFF1),
+                eyeColor:  color(0xFF6F00), patternColor: color(0xCFD8DC),
+                patternType: .solid,      bodyScale: .chonky, price: 650, isDefault: false,
+                accessory: .vikingHelmet, accessoryColor: color(0x78909C)),
+
+        CatSkin(id: "dj",         name: "DJ",
+                bodyColor: color(0x212121), bellyColor: color(0x424242),
+                eyeColor:  color(0xFF4081), patternColor: color(0xFF4081),
+                patternType: .solid,      bodyScale: .normal, price: 575, isDefault: false,
+                accessory: .headphones,   accessoryColor: color(0xFF4081)),
+
+        CatSkin(id: "rocker",     name: "Rocker",
+                bodyColor: color(0x4A0080), bellyColor: color(0x7B1FA2),
+                eyeColor:  color(0xFF6D00), patternColor: color(0xFF6D00),
+                patternType: .solid,      bodyScale: .normal, price: 575, isDefault: false,
+                accessory: .headphones,   accessoryColor: color(0xFF6D00)),
+
+        CatSkin(id: "angel",      name: "Angel",
+                bodyColor: color(0xFFFDE7), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0x42A5F5), patternColor: color(0xFFD740),
+                patternType: .solid,      bodyScale: .normal, price: 550, isDefault: false,
+                accessory: .halo,         accessoryColor: color(0xFFD740)),
+
+        CatSkin(id: "alien",      name: "Alien",
+                bodyColor: color(0x69F0AE), bellyColor: color(0xB9F6CA),
+                eyeColor:  color(0x00BFA5), patternColor: color(0xFF4081),
+                patternType: .solid,      bodyScale: .slim,   price: 600, isDefault: false,
+                accessory: .alienAntenna, accessoryColor: color(0x00BFA5)),
+
+        CatSkin(id: "robot",      name: "Robot",
+                bodyColor: color(0x78909C), bellyColor: color(0xB0BEC5),
+                eyeColor:  color(0x00BCD4), patternColor: color(0xCFD8DC),
+                patternType: .solid,      bodyScale: .normal, price: 525, isDefault: false,
+                accessory: .antenna,      accessoryColor: color(0x00BCD4)),
+
+        CatSkin(id: "nerd",       name: "Nerd",
+                bodyColor: color(0xFFF9C4), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0x5C6BC0), patternColor: color(0x5C6BC0),
+                patternType: .solid,      bodyScale: .normal, price: 450, isDefault: false,
+                accessory: .glasses,      accessoryColor: color(0x3E2723)),
+
+        CatSkin(id: "hipster",    name: "Hipster",
+                bodyColor: color(0x8D6E63), bellyColor: color(0xD7CCC8),
+                eyeColor:  color(0x4E342E), patternColor: color(0xA1887F),
+                patternType: .marbled,    bodyScale: .slim,   price: 500, isDefault: false,
+                accessory: .glasses,      accessoryColor: color(0x4E342E)),
+
+        CatSkin(id: "cyberpunk",  name: "Cyberpunk",
+                bodyColor: color(0x0D0D0D), bellyColor: color(0x1A1A1A),
+                eyeColor:  color(0x39FF14), patternColor: color(0xFF006E),
+                patternType: .tabby,      bodyScale: .slim,   price: 650, isDefault: false,
+                accessory: .sunglasses,   accessoryColor: color(0xFF006E)),
+
+        CatSkin(id: "detective",  name: "Detective",
+                bodyColor: color(0x795548), bellyColor: color(0xD7CCC8),
+                eyeColor:  color(0x5C6BC0), patternColor: color(0xFFD700),
+                patternType: .solid,      bodyScale: .normal, price: 500, isDefault: false,
+                accessory: .monocle,      accessoryColor: color(0xFFD700)),
+
+        CatSkin(id: "cool_kid",   name: "Cool Kid",
+                bodyColor: color(0xFF8F00), bellyColor: color(0xFFCC80),
+                eyeColor:  color(0x1565C0), patternColor: color(0xFFFFFF),
+                patternType: .solid,      bodyScale: .normal, price: 475, isDefault: false,
+                accessory: .cap,          accessoryColor: color(0x1565C0)),
+
+        CatSkin(id: "beanie_cat", name: "Beanie Cat",
+                bodyColor: color(0x42A5F5), bellyColor: color(0xBBDEFB),
+                eyeColor:  color(0xFFB300), patternColor: color(0xFFFFFF),
+                patternType: .solid,      bodyScale: .chonky, price: 450, isDefault: false,
+                accessory: .beanie,       accessoryColor: color(0xEF5350)),
+
+        CatSkin(id: "diva",       name: "Diva",
+                bodyColor: color(0xFF4DB8), bellyColor: color(0xFF99DD),
+                eyeColor:  color(0xCC0077), patternColor: color(0xFF0066),
+                patternType: .solid,      bodyScale: .chonky, price: 600, isDefault: false,
+                accessory: .ribbon,       accessoryColor: color(0xFF0066)),
+
+        CatSkin(id: "classy",     name: "Classy",
+                bodyColor: color(0xF5F5F5), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0x1565C0), patternColor: color(0xE53935),
+                patternType: .tuxedo,     bodyScale: .normal, price: 550, isDefault: false,
+                accessory: .bowtie,       accessoryColor: color(0xE53935)),
     ]
 
     static let ORANGE = getById("classic_orange")
