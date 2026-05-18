@@ -171,6 +171,131 @@ enum CatSkins {
                 bodyColor: color(0x7E57C2), bellyColor: color(0xD1C4E9),
                 eyeColor:  color(0xE91E63), patternColor: color(0x4527A0),
                 patternType: .spotted,    bodyScale: .normal, price: 500, isDefault: false),
+
+        // ── Fantásticos ──────────────────────────────────────────────────────
+        CatSkin(id: "galaxy",            name: "Galaxy",
+                bodyColor: color(0x1A0A3C), bellyColor: color(0x2E1760),
+                eyeColor:  color(0x00E5FF), patternColor: color(0x7C4DFF),
+                patternType: .spotted,    bodyScale: .slim,   price: 550, isDefault: false),
+
+        CatSkin(id: "nebula",            name: "Nebula",
+                bodyColor: color(0x2C1654), bellyColor: color(0x6A1E8A),
+                eyeColor:  color(0xFF4081), patternColor: color(0xE040FB),
+                patternType: .marbled,    bodyScale: .normal, price: 575, isDefault: false),
+
+        CatSkin(id: "stardust",          name: "Stardust",
+                bodyColor: color(0xB0BEC5), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0xFFD740), patternColor: color(0xFFD700),
+                patternType: .bicolor,    bodyScale: .slim,   price: 525, isDefault: false),
+
+        CatSkin(id: "deep_sea",          name: "Deep Sea",
+                bodyColor: color(0x004D5A), bellyColor: color(0x006978),
+                eyeColor:  color(0x18FFFF), patternColor: color(0x00BFA5),
+                patternType: .spotted,    bodyScale: .normal, price: 475, isDefault: false),
+
+        // ── Vibrantes ─────────────────────────────────────────────────────────
+        CatSkin(id: "cyber_neon",        name: "Cyber Neon",
+                bodyColor: color(0x0D0D0D), bellyColor: color(0x1A1A1A),
+                eyeColor:  color(0x39FF14), patternColor: color(0xFF006E),
+                patternType: .tabby,      bodyScale: .slim,   price: 600, isDefault: false),
+
+        CatSkin(id: "toxic_lime",        name: "Toxic Lime",
+                bodyColor: color(0xB2FF59), bellyColor: color(0xF4FF81),
+                eyeColor:  color(0xE040FB), patternColor: color(0x64DD17),
+                patternType: .spotted,    bodyScale: .normal, price: 450, isDefault: false),
+
+        CatSkin(id: "vampire",           name: "Vampire",
+                bodyColor: color(0x6A0000), bellyColor: color(0x3D0000),
+                eyeColor:  color(0xFF1744), patternColor: color(0x1A0000),
+                patternType: .marbled,    bodyScale: .slim,   price: 500, isDefault: false),
+
+        CatSkin(id: "lava",              name: "Lava",
+                bodyColor: color(0xBF360C), bellyColor: color(0xFF6E40),
+                eyeColor:  color(0xFFD740), patternColor: color(0x212121),
+                patternType: .marbled,    bodyScale: .normal, price: 475, isDefault: false),
+
+        CatSkin(id: "strawberry",        name: "Strawberry",
+                bodyColor: color(0xE53935), bellyColor: color(0xFF8A80),
+                eyeColor:  color(0x1B5E20), patternColor: color(0xB71C1C),
+                patternType: .spotted,    bodyScale: .chonky, price: 400, isDefault: false),
+
+        // ── Pasteles ──────────────────────────────────────────────────────────
+        CatSkin(id: "cotton_candy",      name: "Cotton Candy",
+                bodyColor: color(0xF8BBD0), bellyColor: color(0xE1F5FE),
+                eyeColor:  color(0xCE93D8), patternColor: color(0xF48FB1),
+                patternType: .bicolor,    bodyScale: .chonky, price: 375, isDefault: false),
+
+        CatSkin(id: "sakura",            name: "Sakura",
+                bodyColor: color(0xF8C8D4), bellyColor: color(0xFFF0F3),
+                eyeColor:  color(0xFF80AB), patternColor: color(0xF48FB1),
+                patternType: .spotted,    bodyScale: .normal, price: 375, isDefault: false),
+
+        CatSkin(id: "mint_chip",         name: "Mint Chip",
+                bodyColor: color(0xA5D6A7), bellyColor: color(0xE8F5E9),
+                eyeColor:  color(0x4E342E), patternColor: color(0x4E342E),
+                patternType: .spotted,    bodyScale: .normal, price: 350, isDefault: false),
+
+        CatSkin(id: "bubblegum",         name: "Bubblegum",
+                bodyColor: color(0xFF4DB8), bellyColor: color(0xFF99DD),
+                eyeColor:  color(0x00BCD4), patternColor: color(0xCC0077),
+                patternType: .solid,      bodyScale: .chonky, price: 425, isDefault: false),
+
+        CatSkin(id: "coral_reef",        name: "Coral Reef",
+                bodyColor: color(0xFF7043), bellyColor: color(0xFFCCBC),
+                eyeColor:  color(0x0097A7), patternColor: color(0xBF360C),
+                patternType: .spotted,    bodyScale: .normal, price: 375, isDefault: false),
+
+        // ── Naturales ─────────────────────────────────────────────────────────
+        CatSkin(id: "cinnamon_roll",     name: "Cinnamon Roll",
+                bodyColor: color(0xA1613E), bellyColor: color(0xFFE0B2),
+                eyeColor:  color(0x795548), patternColor: color(0x6D4C41),
+                patternType: .marbled,    bodyScale: .chonky, price: 325, isDefault: false),
+
+        CatSkin(id: "caramel_swirl",     name: "Caramel Swirl",
+                bodyColor: color(0xCC8844), bellyColor: color(0xFFDDA0),
+                eyeColor:  color(0x6D4C41), patternColor: color(0x8B5A2B),
+                patternType: .marbled,    bodyScale: .normal, price: 350, isDefault: false),
+
+        CatSkin(id: "matcha",            name: "Matcha",
+                bodyColor: color(0x8BA888), bellyColor: color(0xC8D5B9),
+                eyeColor:  color(0xD32F2F), patternColor: color(0x4E6B4E),
+                patternType: .tabby,      bodyScale: .slim,   price: 375, isDefault: false),
+
+        CatSkin(id: "desert_sand",       name: "Desert Sand",
+                bodyColor: color(0xC9A96E), bellyColor: color(0xF0DCBA),
+                eyeColor:  color(0xF57F17), patternColor: color(0x9E7B46),
+                patternType: .tabby,      bodyScale: .normal, price: 300, isDefault: false),
+
+        // ── Elementales ───────────────────────────────────────────────────────
+        CatSkin(id: "storm_cloud",       name: "Storm Cloud",
+                bodyColor: color(0x546E7A), bellyColor: color(0x90A4AE),
+                eyeColor:  color(0xE3F2FD), patternColor: color(0x263238),
+                patternType: .marbled,    bodyScale: .normal, price: 425, isDefault: false),
+
+        CatSkin(id: "ice_queen",         name: "Ice Queen",
+                bodyColor: color(0xCFECF9), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0x00B0FF), patternColor: color(0x81D4FA),
+                patternType: .colorpoint, bodyScale: .slim,   price: 450, isDefault: false),
+
+        CatSkin(id: "ancient_gold",      name: "Ancient Gold",
+                bodyColor: color(0xB8860B), bellyColor: color(0xFFD700),
+                eyeColor:  color(0x1A237E), patternColor: color(0x7B5800),
+                patternType: .marbled,    bodyScale: .chonky, price: 550, isDefault: false),
+
+        CatSkin(id: "ghost",             name: "Ghost",
+                bodyColor: color(0xF3F3F3), bellyColor: color(0xFFFFFF),
+                eyeColor:  color(0xB39DDB), patternColor: color(0xDDDDDD),
+                patternType: .solid,      bodyScale: .slim,   price: 500, isDefault: false),
+
+        CatSkin(id: "sunflower",         name: "Sunflower",
+                bodyColor: color(0xFFCC00), bellyColor: color(0xFFF9C4),
+                eyeColor:  color(0xE65100), patternColor: color(0xF9A825),
+                patternType: .spotted,    bodyScale: .chonky, price: 400, isDefault: false),
+
+        CatSkin(id: "emerald",           name: "Emerald",
+                bodyColor: color(0x00695C), bellyColor: color(0x4DB6AC),
+                eyeColor:  color(0xFFD740), patternColor: color(0x004D40),
+                patternType: .marbled,    bodyScale: .normal, price: 475, isDefault: false),
     ]
 
     static let ORANGE = getById("classic_orange")
