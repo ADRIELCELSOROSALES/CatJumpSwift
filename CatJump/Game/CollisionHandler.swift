@@ -11,19 +11,22 @@ class CollisionHandler {
     func checkPlatformCollision(cat: Cat, platform: Platform) -> Bool {
         guard platform.isActive else { return false }
 
-        let catLeft   = cat.x  - cat.width  / 2 + catMargin
-        let catRight  = cat.x  + cat.width  / 2 - catMargin
-        let catBottom = cat.y  - cat.height / 2
+        let catLeft  = cat.x - cat.width  / 2 + catMargin
+        let catRight = cat.x + cat.width  / 2 - catMargin
+
+        // CatNode draws the body bottom at local y = -30, which sits 30 pts below cat.y in game space
+        let catFeetY = cat.y + 30
 
         let platLeft  = platform.x - platform.width  / 2
         let platRight = platform.x + platform.width  / 2
-        let platTop   = platform.y + platform.height / 2
+        // platform.y is the visual TOP edge of the platform
+        let platTopY  = platform.y
 
         let overlapX = catRight > platLeft && catLeft < platRight
-        // Cat must be falling and its bottom just crossed the platform top
+        // Cat must be falling and its feet just reached the platform's top surface this frame
         let overlapY = cat.velocityY > 0
-            && catBottom <= platTop
-            && catBottom >= platTop - cat.velocityY - 1
+            && catFeetY >= platTopY
+            && catFeetY <= platTopY + cat.velocityY + 1
 
         return overlapX && overlapY
     }

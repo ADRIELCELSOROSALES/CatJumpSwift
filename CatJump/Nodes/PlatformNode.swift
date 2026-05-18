@@ -11,9 +11,9 @@ class PlatformNode: SKNode {
 
     // MARK: - Configure
 
-    func configure(type: PlatformType) {
+    func configure(type: PlatformType, width: CGFloat = GameConstants.platformWidth) {
         removeAllChildren()
-        let w = GameConstants.platformWidth
+        let w = width
         let h = GameConstants.platformHeight
         height = h
 

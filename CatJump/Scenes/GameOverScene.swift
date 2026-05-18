@@ -110,8 +110,8 @@ final class GameOverScene: SKScene {
     private func buildTryAgainButton(cx: CGFloat, h: CGFloat) {
         let btn = buttonNode(text: "▶  TRY AGAIN", width: 200, height: 56,
                              fill: SKColor(red: 0.18, green: 0.49, blue: 0.20, alpha: 1),
-                             at: CGPoint(x: cx, y: h * 0.19))
-        btn.name      = "tryAgain"
+                             at: CGPoint(x: cx, y: h * 0.19),
+                             name: "tryAgain")
         btn.zPosition = 5
         addChild(btn)
     }
@@ -119,8 +119,8 @@ final class GameOverScene: SKScene {
     private func buildMenuButton(cx: CGFloat, h: CGFloat) {
         let btn = buttonNode(text: "MENU", width: 130, height: 44,
                              fill: SKColor(red: 0.15, green: 0.15, blue: 0.3, alpha: 0.88),
-                             at: CGPoint(x: cx, y: h * 0.10))
-        btn.name      = "menu"
+                             at: CGPoint(x: cx, y: h * 0.10),
+                             name: "menu")
         btn.zPosition = 5
         addChild(btn)
     }
@@ -172,9 +172,10 @@ final class GameOverScene: SKScene {
     // MARK: - Factory helpers
 
     private func buttonNode(text: String, width: CGFloat, height: CGFloat,
-                            fill: SKColor, at pos: CGPoint) -> SKNode {
+                            fill: SKColor, at pos: CGPoint, name: String) -> SKNode {
         let container = SKNode()
         container.position = pos
+        container.name = name
 
         let bg = SKShapeNode(rect: CGRect(x: -width/2, y: -height/2,
                                           width: width, height: height),
@@ -182,7 +183,7 @@ final class GameOverScene: SKScene {
         bg.fillColor   = fill
         bg.strokeColor = fill.withAlphaComponent(0.4)
         bg.lineWidth   = 2
-        bg.name        = container.name
+        bg.name        = name
         container.addChild(bg)
 
         let label = SKLabelNode(text: text)
@@ -191,6 +192,7 @@ final class GameOverScene: SKScene {
         label.fontColor = .white
         label.verticalAlignmentMode   = .center
         label.horizontalAlignmentMode = .center
+        label.name = name
         container.addChild(label)
 
         return container

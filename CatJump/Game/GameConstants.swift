@@ -11,12 +11,12 @@ enum GameConstants {
     static let fatnessGainPerBird: CGFloat    = 0.1
     static let maxFatness: CGFloat            = 1.0
 
-    static let mouseSize: CGFloat             = 50
+    static let mouseSize: CGFloat             = 35
     static let mouseSpawnChance: Double       = 0.15
-    static let dogSize: CGFloat               = 100
+    static let dogSize: CGFloat               = 60
     static let dogSpawnChance: Double         = 0.18
     static let dogWalkSpeed: CGFloat          = 1.5
-    static let cactusSize: CGFloat            = 60
+    static let cactusSize: CGFloat            = 44
     static let cactusSpawnChance: Double      = 0.12
 
     static let minDamagingObstacleGap: Int    = 3
@@ -24,7 +24,7 @@ enum GameConstants {
     static let invincibilityFrames: Int       = 60
 
     static let obstacleSize: CGFloat          = 70
-    static let powerUpSize: CGFloat           = 70
+    static let powerUpSize: CGFloat           = 50
     static let powerUpSpawnChance: Double     = 0.08
 
     static let jetpackBoost: CGFloat          = -40.0
@@ -40,6 +40,6 @@ enum GameConstants {
 
     static let minPlatformGap: CGFloat        = 100
     static let maxPlatformGap: CGFloat        = 160
-    static let platformWidth: CGFloat         = 220
+    static let platformWidth: CGFloat         = 140
     static let platformHeight: CGFloat        = 22
 }

@@ -19,17 +19,28 @@ struct GameState {
     var activeDogCount: Int = 0
 
     static func initial(screenWidth: CGFloat, screenHeight: CGFloat) -> GameState {
-        let cat = Cat(x: screenWidth / 2, y: screenHeight * 0.3)
+        // Cat starts in lower portion; velocity already set to jump so it bounces immediately.
+        let catY = screenHeight * 0.72
+        var cat = Cat(x: screenWidth / 2, y: catY)
+        cat.velocityY = GameConstants.jumpVelocity
 
         var platforms: [Platform] = []
-        platforms.append(Platform(x: screenWidth / 2, y: 80, width: screenWidth * 0.8))
-        platforms.append(Platform(x: screenWidth / 2, y: screenHeight * 0.3 - 90))
+        let margin = GameConstants.platformWidth / 2 + 12
 
-        let spacing = screenHeight / 6
-        for i in 1...5 {
-            let px = CGFloat.random(in: 80...(screenWidth - 80))
-            let py = screenHeight * 0.3 + CGFloat(i) * spacing
-            platforms.append(Platform(x: px, y: py))
+        // platform.y = top edge; cat body bottom is 30 pts below cat.y (from CatNode local y=-30)
+        // Collision triggers when catFeetY (cat.y + 30) reaches platform.y, so:
+        // startPlatY = catY + 30  →  cat appears standing on the platform at launch
+        let startPlatY = catY + 30
+        platforms.append(Platform(x: screenWidth / 2, y: startPlatY))
+
+        // Pre-generate platforms upward (decreasing Y) to cover 2.5 screens above the cat.
+        // step8 will top this up proactively during gameplay so no "pop-in" occurs.
+        var y = startPlatY - CGFloat.random(in: GameConstants.minPlatformGap...GameConstants.maxPlatformGap)
+        let topLimit = catY - screenHeight * 2.5
+        while y > topLimit {
+            let px = CGFloat.random(in: margin...(screenWidth - margin))
+            platforms.append(Platform(x: px, y: y))
+            y -= CGFloat.random(in: GameConstants.minPlatformGap...GameConstants.maxPlatformGap)
         }
 
         return GameState(

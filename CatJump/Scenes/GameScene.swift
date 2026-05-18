@@ -208,7 +208,7 @@ class GameScene: SKScene {
         for platform in state.platforms {
             if platformNodes[platform.id] == nil {
                 let n = PlatformNode()
-                n.configure(type: platform.type)
+                n.configure(type: platform.type, width: platform.width)
                 n.zPosition = 5
                 addChild(n)
                 platformNodes[platform.id] = n

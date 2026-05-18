@@ -13,43 +13,82 @@ struct ContentView: View {
 // MARK: - Platform bridge
 
 #if os(iOS) || os(visionOS)
-struct SpriteKitView: UIViewRepresentable {
+
+// Custom SKView subclass so scene presentation happens in layoutSubviews,
+// which is guaranteed to run after the view has its final non-zero bounds.
+fileprivate final class SKHostView: SKView {
+    var pendingServices: ServiceContainer?
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        guard scene == nil,
+              bounds.size.width > 0, bounds.size.height > 0,
+              let services = pendingServices else { return }
+        pendingServices = nil
+        let scene = MenuScene(services: services)
+        scene.scaleMode = .resizeFill
+        scene.size = bounds.size
+        presentScene(scene)
+    }
+}
+
+fileprivate struct SpriteKitView: UIViewRepresentable {
     var services: ServiceContainer
 
-    func makeUIView(context: Context) -> SKView {
-        let view = SKView()
+    func makeUIView(context: Context) -> SKHostView {
+        let view = SKHostView()
+        view.isUserInteractionEnabled = true
         view.ignoresSiblingOrder = true
         view.showsFPS       = false
         view.showsNodeCount = false
+        view.pendingServices = services
         return view
     }
 
-    func updateUIView(_ uiView: SKView, context: Context) {
-        guard uiView.scene == nil, uiView.bounds.size != .zero else { return }
-        let scene = MenuScene(services: services)
-        scene.scaleMode = .resizeFill
-        scene.size = uiView.bounds.size
-        uiView.presentScene(scene)
+    func updateUIView(_ uiView: SKHostView, context: Context) {
+        if uiView.scene == nil {
+            uiView.pendingServices = services
+            uiView.setNeedsLayout()
+        }
     }
 }
+
 #elseif os(macOS)
-struct SpriteKitView: NSViewRepresentable {
+
+fileprivate final class SKHostView: SKView {
+    var pendingServices: ServiceContainer?
+
+    override func layout() {
+        super.layout()
+        guard scene == nil,
+              bounds.size.width > 0, bounds.size.height > 0,
+              let services = pendingServices else { return }
+        pendingServices = nil
+        let scene = MenuScene(services: services)
+        scene.scaleMode = .resizeFill
+        scene.size = bounds.size
+        presentScene(scene)
+    }
+}
+
+fileprivate struct SpriteKitView: NSViewRepresentable {
     var services: ServiceContainer
 
-    func makeNSView(context: Context) -> SKView {
-        let view = SKView()
+    func makeNSView(context: Context) -> SKHostView {
+        let view = SKHostView()
         view.ignoresSiblingOrder = true
         view.showsFPS       = false
         view.showsNodeCount = false
+        view.pendingServices = services
         return view
     }
 
-    func updateNSView(_ nsView: SKView, context: Context) {
-        guard nsView.scene == nil, nsView.bounds.size != .zero else { return }
-        let scene = MenuScene(services: services)
-        scene.scaleMode = .resizeFill
-        scene.size = nsView.bounds.size
-        nsView.presentScene(scene)
+    func updateNSView(_ nsView: SKHostView, context: Context) {
+        if nsView.scene == nil {
+            nsView.pendingServices = services
+            nsView.needsLayout = true
+        }
     }
 }
+
 #endif

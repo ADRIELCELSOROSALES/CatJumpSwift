@@ -9,7 +9,7 @@ struct Platform {
     let id: UUID = UUID()
     var x: CGFloat
     var y: CGFloat
-    var width: CGFloat = 220
+    var width: CGFloat = GameConstants.platformWidth
     var height: CGFloat = 22
     var type: PlatformType = .normal
     var velocityX: CGFloat = 0

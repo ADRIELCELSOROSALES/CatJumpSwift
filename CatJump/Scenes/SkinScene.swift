@@ -188,8 +188,8 @@ final class SkinScene: SKScene {
     private func buildBackButton(h: CGFloat) {
         let btn = buttonNode(text: "← VOLVER", width: 150, height: 46,
                              fill: SKColor(red: 0.15, green: 0.15, blue: 0.30, alpha: 0.88),
-                             at: CGPoint(x: size.width / 2, y: h * 0.06))
-        btn.name      = "back"
+                             at: CGPoint(x: size.width / 2, y: h * 0.06),
+                             name: "back")
         btn.zPosition = 5
         addChild(btn)
     }
@@ -303,9 +303,10 @@ final class SkinScene: SKScene {
     // MARK: - Factory helpers
 
     private func buttonNode(text: String, width: CGFloat, height: CGFloat,
-                            fill: SKColor, at pos: CGPoint) -> SKNode {
+                            fill: SKColor, at pos: CGPoint, name: String) -> SKNode {
         let container = SKNode()
         container.position = pos
+        container.name = name
 
         let bg = SKShapeNode(rect: CGRect(x: -width/2, y: -height/2,
                                           width: width, height: height),
@@ -313,6 +314,7 @@ final class SkinScene: SKScene {
         bg.fillColor   = fill
         bg.strokeColor = fill.withAlphaComponent(0.4)
         bg.lineWidth   = 2
+        bg.name        = name
         container.addChild(bg)
 
         let label = SKLabelNode(text: text)
@@ -321,6 +323,7 @@ final class SkinScene: SKScene {
         label.fontColor = .white
         label.verticalAlignmentMode   = .center
         label.horizontalAlignmentMode = .center
+        label.name = name
         container.addChild(label)
 
         return container

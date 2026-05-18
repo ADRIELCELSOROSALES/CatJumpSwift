@@ -90,7 +90,7 @@ class PlatformGenerator {
     func generateMouseOnPlatform(_ platform: Platform) -> Obstacle? {
         guard Double.random(in: 0..<1) < GameConstants.mouseSpawnChance else { return nil }
         return Obstacle(
-            x: platform.x, y: platform.y + platform.height / 2 + GameConstants.mouseSize / 2,
+            x: platform.x, y: platform.y - GameConstants.mouseSize / 2,
             width: GameConstants.mouseSize, height: GameConstants.mouseSize,
             type: .mouse, velocityX: GameConstants.obstacleSpeed,
             platformMinX: platform.x - platform.width / 2,
@@ -101,7 +101,7 @@ class PlatformGenerator {
     func generateCactusOnPlatform(_ platform: Platform) -> Obstacle? {
         guard Double.random(in: 0..<1) < GameConstants.cactusSpawnChance else { return nil }
         return Obstacle(
-            x: platform.x, y: platform.y + platform.height / 2 + GameConstants.cactusSize / 2,
+            x: platform.x, y: platform.y - GameConstants.cactusSize / 2,
             width: GameConstants.cactusSize, height: GameConstants.cactusSize,
             type: .cactus
         )
@@ -110,7 +110,7 @@ class PlatformGenerator {
     func generateDogOnPlatform(_ platform: Platform) -> Obstacle? {
         guard Double.random(in: 0..<1) < GameConstants.dogSpawnChance else { return nil }
         return Obstacle(
-            x: platform.x, y: platform.y + platform.height / 2 + GameConstants.dogSize / 2,
+            x: platform.x, y: platform.y - GameConstants.dogSize / 2,
             width: GameConstants.dogSize, height: GameConstants.dogSize,
             type: .dog, velocityX: GameConstants.dogWalkSpeed,
             platformMinX: platform.x - platform.width / 2,
@@ -123,7 +123,7 @@ class PlatformGenerator {
         let type: PowerUpType = Double.random(in: 0..<1) < 0.5 ? .jetpack : .kibble
         return PowerUp(
             x: platform.x,
-            y: platform.y + platform.height / 2 + GameConstants.powerUpSize / 2,
+            y: platform.y - GameConstants.powerUpSize / 2,
             type: type
         )
     }

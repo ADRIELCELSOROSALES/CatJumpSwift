@@ -202,6 +202,9 @@ class GameEngine {
 
         // --- Platforms ---
         if let platform = collisionHandler.findCollidingPlatform(cat: s.cat, platforms: s.platforms) {
+            // Snap feet to platform surface so the cat never visually sinks into the platform
+            s.cat.y = platform.y - 30
+
             let jumpVel: CGFloat
             if s.cat.superJumpActive && s.cat.superJumpsRemaining > 0 {
                 jumpVel = GameConstants.superJumpVelocity
@@ -257,49 +260,55 @@ class GameEngine {
     private func step8_generateNewContent(_ state: GameState) -> GameState {
         var s = state
 
-        guard let topPlatform = s.platforms.min(by: { $0.y < $1.y }) else { return s }
+        // Fill platforms until they extend at least 0.5 screens above the camera top.
+        // This prevents the "platforms popping in" UX issue during fast upward movement.
+        let fillTarget = s.cameraY - s.screenHeight * 0.5
+        var safety = 0
 
-        let topOfVisible = s.cameraY
-        guard topPlatform.y > topOfVisible + s.screenHeight * 0.8 else { return s }
+        while safety < 15,
+              let topPlatform = s.platforms.min(by: { $0.y < $1.y }),
+              topPlatform.y > fillTarget {
 
-        let minGap = difficultyManager.getMinPlatformGap(level: s.level)
-        let maxGap = difficultyManager.getMaxPlatformGap(level: s.level)
-        let gap = CGFloat.random(in: minGap...maxGap)
+            safety += 1
 
-        let newPlatform = platformGenerator.generateNewPlatform(
-            screenWidth: s.screenWidth,
-            highestPlatformY: topPlatform.y - gap,
-            level: s.level,
-            lastPlatformX: topPlatform.x
-        )
-        s.platforms.append(newPlatform)
-        platformsSinceLastDamagingObstacle += 1
+            let minGap = difficultyManager.getMinPlatformGap(level: s.level)
+            let maxGap = difficultyManager.getMaxPlatformGap(level: s.level)
+            let gap = CGFloat.random(in: minGap...maxGap)
 
-        // Skip obstacle/power-up spawning on fragile and spring platforms
-        guard newPlatform.type == .normal || newPlatform.type == .moving else { return s }
+            let newPlatform = platformGenerator.generateNewPlatform(
+                screenWidth: s.screenWidth,
+                highestPlatformY: topPlatform.y - gap,
+                level: s.level,
+                lastPlatformX: topPlatform.x
+            )
+            s.platforms.append(newPlatform)
+            platformsSinceLastDamagingObstacle += 1
 
-        // Power-up has priority
-        if let powerUp = platformGenerator.generatePowerUpOnPlatform(newPlatform) {
-            s.powerUps.append(powerUp)
-            return s
-        }
+            // No obstacles or power-ups on fragile / spring platforms
+            guard newPlatform.type == .normal || newPlatform.type == .moving else { continue }
 
-        let canSpawnDamaging = platformsSinceLastDamagingObstacle > GameConstants.minDamagingObstacleGap
+            if let powerUp = platformGenerator.generatePowerUpOnPlatform(newPlatform) {
+                s.powerUps.append(powerUp)
+                continue
+            }
 
-        if canSpawnDamaging {
-            if let dog = platformGenerator.generateDogOnPlatform(newPlatform) {
-                s.obstacles.append(dog)
-                s.activeDogCount += 1
-                s.soundEvents.append(.dogAppeared)
-                platformsSinceLastDamagingObstacle = 0
-            } else if let cactus = platformGenerator.generateCactusOnPlatform(newPlatform) {
-                s.obstacles.append(cactus)
-                platformsSinceLastDamagingObstacle = 0
+            let canSpawnDamaging = platformsSinceLastDamagingObstacle > GameConstants.minDamagingObstacleGap
+
+            if canSpawnDamaging {
+                if let dog = platformGenerator.generateDogOnPlatform(newPlatform) {
+                    s.obstacles.append(dog)
+                    s.activeDogCount += 1
+                    s.soundEvents.append(.dogAppeared)
+                    platformsSinceLastDamagingObstacle = 0
+                } else if let cactus = platformGenerator.generateCactusOnPlatform(newPlatform) {
+                    s.obstacles.append(cactus)
+                    platformsSinceLastDamagingObstacle = 0
+                } else if let mouse = platformGenerator.generateMouseOnPlatform(newPlatform) {
+                    s.obstacles.append(mouse)
+                }
             } else if let mouse = platformGenerator.generateMouseOnPlatform(newPlatform) {
                 s.obstacles.append(mouse)
             }
-        } else if let mouse = platformGenerator.generateMouseOnPlatform(newPlatform) {
-            s.obstacles.append(mouse)
         }
 
         return s
