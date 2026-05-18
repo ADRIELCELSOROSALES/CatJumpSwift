@@ -59,7 +59,7 @@ class GameScene: SKScene {
         hudLayer = SKNode()
         hudLayer.zPosition = 100
         addChild(hudLayer)
-        setupHUD()
+        setupHUD(topInset: view.safeAreaInsets.top)
 
         // Audio
         SoundManager.shared.startBackgroundMusic()
@@ -249,22 +249,23 @@ class GameScene: SKScene {
 
     // MARK: - HUD
 
-    private func setupHUD() {
+    private func setupHUD(topInset: CGFloat = 0) {
         let w = size.width
         let h = size.height
+        let top = topInset + 16
 
-        scoreLabel = hud(text: "0", size: 30, pos: CGPoint(x: w / 2, y: h - 52))
+        scoreLabel = hud(text: "0", size: 30, pos: CGPoint(x: w / 2, y: h - top))
         scoreLabel.fontColor = .white
 
-        highScoreLabel = hud(text: "Best: 0", size: 16, pos: CGPoint(x: w / 2, y: h - 74))
+        highScoreLabel = hud(text: "Best: 0", size: 16, pos: CGPoint(x: w / 2, y: h - top - 24))
         highScoreLabel.fontColor = SKColor.white.withAlphaComponent(0.7)
 
-        levelLabel = hud(text: "Lv 1", size: 18, pos: CGPoint(x: w - 52, y: h - 50))
+        levelLabel = hud(text: "Lv 1", size: 18, pos: CGPoint(x: w - 16, y: h - top))
         levelLabel.fontColor = SKColor(red: 1, green: 0.84, blue: 0, alpha: 1)
         levelLabel.horizontalAlignmentMode = .right
 
         livesContainer = SKNode()
-        livesContainer.position = CGPoint(x: 16, y: h - 52)
+        livesContainer.position = CGPoint(x: 16, y: h - top)
 
         hudLayer.addChild(scoreLabel)
         hudLayer.addChild(highScoreLabel)
