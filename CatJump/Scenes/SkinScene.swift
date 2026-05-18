@@ -220,8 +220,8 @@ final class SkinScene: SKScene {
 
     private func applyScroll(_ offset: CGFloat) {
         let clamped = max(0, min(maxScrollOffset, offset))
-        scrollOffset           = clamped
-        gridLayer.position.y   = -clamped
+        scrollOffset         = clamped
+        gridLayer.position.y = clamped   // SpriteKit y-up: move grid UP to reveal rows below
     }
 
     // MARK: - Input
@@ -239,7 +239,7 @@ final class SkinScene: SKScene {
         guard let touch = touches.first else { return }
         let dy = dragStartY - touch.location(in: self).y
         if abs(dy) > 6 { isDragging = true }
-        if isDragging { applyScroll(dragStartOffset + dy) }
+        if isDragging { applyScroll(dragStartOffset - dy) }   // drag up → dy<0 → offset grows
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -262,7 +262,7 @@ final class SkinScene: SKScene {
     override func mouseDragged(with event: NSEvent) {
         let dy = dragStartY - event.location(in: self).y
         if abs(dy) > 6 { isDragging = true }
-        if isDragging { applyScroll(dragStartOffset + dy) }
+        if isDragging { applyScroll(dragStartOffset - dy) }
     }
 
     override func mouseUp(with event: NSEvent) {
