@@ -4,6 +4,7 @@
 ![iOS](https://img.shields.io/badge/iOS-16%2B-blue?logo=apple)
 ![SpriteKit](https://img.shields.io/badge/SpriteKit-native-green)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
+![Platform](https://img.shields.io/badge/platform-iPhone%20%7C%20iPad%20%7C%20Mac-lightgrey?logo=apple)
 
 Juego de plataformas vertical para iPhone, inspirado en el estilo Doodle Jump. El gato salta de plataforma en plataforma subiendo infinitamente mientras esquiva obstáculos, come pájaros y ratones para ganar vidas, y activa power-ups que desafían la física del juego. Cada sesión es distinta gracias a la generación procedural de contenido y un sistema de dificultad que escala con el score.
 
@@ -17,7 +18,7 @@ El gato aparece en pantalla y cae libremente por gravedad hasta aterrizar en la 
 
 Las plataformas son de cuatro tipos: normales (siempre confiables), móviles (se desplazan horizontalmente), frágiles (desaparecen al primer contacto) y con resorte (lanzan al gato mucho más alto). Con el avance del nivel aparecen obstáculos: cactus estáticos, perros que patrullan, murciélagos y pájaros que vuelan, y ratones que rebotan. Los pájaros y ratones pueden comerse tocándolos, lo que engrosa al gato y otorga una vida extra cada cinco comidas. El perro emite un sonido especial al aparecer.
 
-Los power-ups cambian la dinámica temporalmente: el jetpack impulsa al gato hacia arriba de forma sostenida durante 2,5 segundos sin depender de plataformas; las croquetas (kibble) otorgan tres super-saltos consecutivos con velocidad de lanzamiento mayor. Perder todas las vidas termina la partida y lleva a la pantalla de Game Over, donde el score se compara contra el récord guardado en el dispositivo y en Game Center.
+Los power-ups cambian la dinámica temporalmente: el jetpack impulsa al gato hacia arriba de forma sostenida durante 2,5 segundos sin depender de plataformas; las croquetas (kibble) otorgan tres super-saltos consecutivos con velocidad de lanzamiento mayor. **Mientras cualquier power-up esté activo el gato es completamente invulnerable a todo daño.** Perder todas las vidas termina la partida y lleva a la pantalla de Game Over, donde el score se compara contra el récord guardado en el dispositivo y en Game Center.
 
 ---
 
@@ -99,7 +100,7 @@ CatJump/
 - **28 skins de gato** completamente procedurales: cada skin define colores de cuerpo, vientre, ojos y patrón. Los patrones (tabby, tuxedo, calico, spotted, colorpoint, marbled, bicolor, solid) se dibujan con `SKShapeNode` y `CGPath` en tiempo de ejecución. Tres escalas de cuerpo: normal, chonky y slim.
 - **4 tipos de plataformas**: normal, móvil, frágil y con resorte. Cada tipo tiene representación visual propia y comportamiento de físicas distinto.
 - **5 tipos de obstáculos**: cactus, perro (con ladrido), murciélago, pájaro y ratón. Los dos últimos son comibles.
-- **2 power-ups**: jetpack (vuelo sostenido 2,5s) y kibble (3 super-saltos consecutivos), ambos con aura visual en el gato y partículas de llama.
+- **2 power-ups**: jetpack (vuelo sostenido 2,5s) y kibble (3 super-saltos consecutivos), ambos con aura visual en el gato, partículas de llama e **invulnerabilidad total** mientras estén activos.
 - **Sistema de gordura**: comer pájaros y ratones incrementa `cat.fatness` y otorga una vida extra cada 5 comidas.
 - **Dificultad progresiva**: el `DifficultyManager` ajusta el gap entre plataformas, la velocidad de las móviles y la probabilidad de spawn de obstáculos a medida que sube el nivel (un nivel cada 1000 puntos).
 - **Game Center Leaderboard**: autenticación automática al arrancar, submit del high score al terminar la partida, pantalla de ranking accesible desde el menú.
@@ -123,12 +124,23 @@ CatJump/
 
 ## Roadmap / Pendiente
 
-- [ ] **Archivos de audio**: agregar al bundle los archivos `salto.mp3`, `loselife.mp3`, `musicloop.mp3`, `gameover.mp3`, `aparicionperro.mp3` y `aparicionperroperro.mp3`. Sin ellos el juego funciona pero en silencio.
 - [ ] **Partículas `.sks`**: crear `JetpackFlame.sks` y `EatEffect.sks` desde **File → New → SpriteKit Particle File** en Xcode con los parámetros documentados en el código. Sin los archivos las partículas no aparecen (no hay crash; el código usa optional binding).
 - [ ] **Game Center en App Store Connect**: activar la capability **Game Center** en el target de Xcode y crear el leaderboard con ID `catjump.highscore` en la consola de App Store Connect para que el submit de scores funcione en producción.
 - [ ] **Sistema de compra de skins**: actualmente todas las skins son accesibles desde el inicio. Implementar el flujo de compra con el precio definido en cada `CatSkin.price` (en unidades de "fichas de pez").
 - [ ] **Modo tablet / landscape**: el diseño de UI y la generación de plataformas asumen pantalla vertical de iPhone. Soporte iPad requeriría ajustar el layout del menú y los gaps de plataformas para pantallas más anchas.
 - [ ] **TestFlight / distribución**: configurar el provisioning profile de distribución y el pipeline de CI para generar builds de TestFlight automáticamente desde la rama `main`.
+
+## Changelog
+
+### Última sesión de desarrollo
+- **Sonidos**: todos los efectos de audio (`salto`, `loselife`, `musicloop`, `gameover`, `aparicionperro`, `aparicionperroperro`) portados desde el repo Android y agregados a `CatJump/Audio/`. Se incluyen automáticamente en el bundle gracias a `PBXFileSystemSynchronizedRootGroup`.
+- **Colisión de plataformas corregida**: la fórmula de detección usaba el borde superior del gato en lugar del inferior (`cat.y − height/2` → `cat.y + 20`). El gato ahora aterriza visualmente sobre la plataforma en lugar de atravesarla.
+- **Generación de plataformas**: `step8` ahora usa un loop de relleno que mantiene plataformas al menos 0,5 pantallas por encima de la cámara en cada frame, eliminando el "pop-in" visible durante la subida rápida.
+- **Layout inicial rediseñado**: el gato arranca al 72 % de la pantalla con `velocityY = jumpVelocity` (ya en movimiento) y las plataformas se pre-generan 2,5 pantallas hacia arriba para cubrir los primeros saltos sin espera.
+- **Touch input**: se corrigió la presentación de escena en `layoutSubviews()` (Xcode 16 / SwiftUI) que impedía que cualquier toque llegara a la escena.
+- **Gato más pequeño**: escala de display reducida al 65 % mediante `GameConstants.catDisplayScale`, manteniendo las proporciones slim / normal / chonky de cada skin.
+- **Invulnerabilidad con power-ups**: `Cat.isInvincible` ahora devuelve `true` mientras `hasPowerUp` sea `true`, protegiéndolo de todo daño durante jetpack y kibble.
+- **Tamaños corregidos**: plataformas, obstáculos y power-ups usan `GameConstants` como fuente única de verdad para ancho/alto, eliminando la discrepancia entre zona de colisión y visual.
 
 ---
 
